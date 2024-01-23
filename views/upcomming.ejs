@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upcoming Events Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <%- include('navbar.ejs')%>
+    <div class="container">
+        <table class="event-table">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Description</th>
+                    <th>Club Name</th>
+                    <th>Schedule Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% EventArr.forEach((event) => { %>
+                    <tr>
+                        <td class="event-name"><%= event.eventName %></td>
+                        <td class="event-description"><%= event.eventDescription %></td>
+                        <td class="club-name"><%= event.clubName %></td>
+                        <td class="schedule-date"><%= event.scheduleDate %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        html,body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(45deg, rgb(13, 14, 13), dodgerblue);
+ 
+  font-family: "Sansita Swashed", cursive;
+}
+
+        .container {
+            margin-top: 140px; /* Adjust this value as needed */
+        }
+
+        table.event-table {
+            width: 100%; /* Make the table width 100% of its container */
+            max-width: 1000px; /* Set maximum width for the table */
+            margin: 0 auto; /* Center the table horizontally */
+            border-collapse: collapse;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            background-color: #111; /* Darker background for the table */
+            color: #fff; /* Text color for the table */
+        }
+
+        th,
+        td {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 20px;
+        }
+
+        th {
+            text-align: left;
+            background-color: #222; /* Darker background for the headers */
+            color: #fff; /* Header text color */
+        }
+
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        tbody td {
+            position: relative;
+        }
+
+        tbody td:hover:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -9999px;
+            bottom: -9999px;
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="script" href="source.js"> -->
+    <title>Document</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+/* 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gilroy';
+    color: #fff;
+    font-size:10px;
+} */
+
+html,body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-image: url("img/rcpit.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Sansita Swashed", cursive;
+ 
+  perspective: 50px;
+  perspective-origin: 50% 100%;
+}
+body::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: inherit;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.center-div{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 92vh;
+    width: 100%;
+    /* border: 2px solid black; */
+    flex-direction: column;
+
+    
+}
+.outer-div{
+    display:inline-block;
+    
+    
+}
+.welcome-text{
+    display: inline-block;
+    padding-bottom: 10vh;
+    /* border: 2px solid black; */
+     color:whitesmoke;
+     font-size: 4vw;
+     font-weight: bolder;
+    
+     
+} 
+/* time and date  */
+
+
+.container-time{
+  font-family: "Lato", sans-serif;
+  background: transparent;
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.display-date {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  /* font-weight: 600; */
+}
+
+.display-time {
+  display: flex;
+  font-size: 3rem;
+  font-weight: bold;
+  
+  border-radius: 5px;
+  transition: ease-in-out 0.1s;
+  transition-property: background, box-shadow, color;
+  -webkit-box-reflect: below 2px
+linear-gradient(transparent, rgba(255, 255, 255, 0.05));
+width: 150px;
+align-items: center;
+justify-content: center;
+}
+
+.display-time:hover {
+ color:whitesmoke;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+  <%- include('navbar.ejs')%>
+    <div class="home">
+ 
+    <div class="center-div">
+        <div class="welcome-text">
+                Welcome To RcpitFesto
+        </div>
+        <div class="container-time">
+                <div class="display-date">
+                  <span id="day">day</span>,
+                  <span id="daynum">00</span>
+                  <span id="month">month</span>
+                  <span id="year">0000</span>
+                </div>
+                <div class="display-time"></div>
+              </div>
+        
+    </div>
+    <script>
+        const displayTime = document.querySelector(".display-time");
+// Time
+function showTime() {
+  let time = new Date();
+  displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: false });
+  setTimeout(showTime, 1000);
+}
+
+showTime();
+
+// Date
+function updateDate() {
+  let today = new Date();
+
+  // return number
+  let dayName = today.getDay(),
+    dayNum = today.getDate(),
+    month = today.getMonth(),
+    year = today.getFullYear();
+
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const dayWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  // value -> ID of the html element
+  const IDCollection = ["day", "daynum", "month", "year"];
+  // return value array with number as a index
+  const val = [dayWeek[dayName], dayNum, months[month], year];
+  for (let i = 0; i < IDCollection.length; i++) {
+    document.getElementById(IDCollection[i]).firstChild.nodeValue = val[i];
+  }
+}
+
+updateDate();
+
+        
+    </script>
+</body>
+</html>
